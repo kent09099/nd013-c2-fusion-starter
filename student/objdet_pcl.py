@@ -168,12 +168,12 @@ def bev_from_pcl(lidar_pcl, configs):
 #     intensity_map[np.int_(lidar_pcl_top[:, 0]), np.int_(lidar_pcl_top[:, 1])] = lidar_pcl_top[:, 3] / (np.amax(lidar_pcl_top[:, 3]) - np.amin(lidar_pcl_top[:, 3]))
     intensity_map[np.int_(lidar_pcl_int[:, 0]), np.int_(lidar_pcl_int[:, 1])] = np.clip(lidar_pcl_int[:, 3] / (int_99 - int_01), 0, 1)
     
-    intensity_map *= 256
-    intensity_map = intensity_map.astype(np.uint8)
+    intensity_map_vis = intensity_map*256
+    intensity_map_vis = intensity_map_vis.astype(np.uint8)
 
     ## step 5 : temporarily visualize the intensity map using OpenCV to make sure that vehicles separate well from the background
 
-#     cv2.imshow('img_intensity', intensity_map)
+#     cv2.imshow('img_intensity', intensity_map_vis)
 #     cv2.waitKey(0)
 
     #######
@@ -198,8 +198,8 @@ def bev_from_pcl(lidar_pcl, configs):
     
     height_map[np.int_(lidar_pcl_top[:, 0]), np.int_(lidar_pcl_top[:, 1])] = lidar_pcl_top[:, 2] / float(np.abs(configs.lim_z[1] - configs.lim_z[0]))
 
-    height_map *= 256
-    height_map = height_map.astype(np.uint8)
+    height_map_vis = height_map * 256
+    height_map_vis = height_map_vis.astype(np.uint8)
 
     ## step 3 : temporarily visualize the intensity map using OpenCV to make sure that vehicles separate well from the background
 #     cv2.imshow('img_height', height_map)
